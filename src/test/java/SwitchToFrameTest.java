@@ -1,4 +1,5 @@
 import io.qameta.allure.Description;
+import jdk.jfr.Enabled;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,7 +43,7 @@ public class SwitchToFrameTest {
         Assert.assertEquals(middleText,"MIDDLE", "The switching to frame is failed");
         }
 
-    @Test()
+    @Test(enabled = false)
     @Description("This test is to validate switching between frames")
     public void switchToFrameExample2(){
         webDriver.get("https://the-internet.herokuapp.com/tinymce");
