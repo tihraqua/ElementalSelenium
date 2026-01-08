@@ -15,6 +15,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/* Switching to frame can be accompolished using below:
+1- find the frame as a web element, then switch to it using the web element.
+2- Switch to the frame using name or id
+3- Switch to the frame using index
+
+To leave the frame using switchTo().defaultContent();
+ */
 public class SwitchToFrameTest {
     WebDriver webDriver;
     By editorBox = By.id("tinymce");
