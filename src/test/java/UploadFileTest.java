@@ -31,13 +31,15 @@ public class UploadFileTest {
     @Test()
     @Description("This test is to validate the upload function")
     public void uploadFile(){
-        String filePath = "C:\\Users\\t.alhusin\\IdeaProjects\\ElementalSelenium\\src\\main\\resources\\testFile.txt";
-        String fileName = "testFile.txt";
+
+        String fileName = "src/main/resources/testFile.txt";
+        File file = new File(fileName);
+        String filePath = file.getAbsolutePath();
         webDriver.get("https://the-internet.herokuapp.com/upload");
         webDriver.findElement(fileUploadBtn).sendKeys(filePath);
         webDriver.findElement(fileSubmitBtn).click();
         String uploadedFileName = webDriver.findElement(uploadedFilesBox).getText();
-        Assert.assertEquals(uploadedFileName,fileName, "The file is not uploaded successfully");
+        Assert.assertEquals(uploadedFileName,fileName.substring(19), "The file is not uploaded successfully");
 
 
 
