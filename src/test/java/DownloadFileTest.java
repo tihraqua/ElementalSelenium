@@ -1,4 +1,7 @@
 import io.qameta.allure.Description;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,8 +12,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.apache.http.client.methods.HttpHead;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +68,21 @@ public class DownloadFileTest {
 
 
 
+
+    }
+
+    @Test
+    public void downloadFileTestRevised() throws IOException {
+        webDriver.get("https://the-internet.herokuapp.com/download");
+        String downloadLink = webDriver.findElement(By.xpath("//div[@class='example']/following::a[1]")).getAttribute("href");
+
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpHead request = new HttpHead(downloadLink);
+        HttpResponse response = httpClient.execute(request);
+        String contentType = response.getFirstHeader("Content-Type").getValue();
+        int contentLength = Integer.parseInt(response.getFirstHeader(("Content-Length")).getValue());
+        Assert.assertEquals(contentType,"text/html; charset=utf-8");
+        Assert.assertNotEquals(contentLength,0);
 
     }
 }
